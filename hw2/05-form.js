@@ -26,6 +26,12 @@ const getData = function getFormData(event) {
   const registered = registrationField.value;
   const additional = additionalField.value;
 
+  // if name, email, or registration status is empty, send an error
+  if (!name || !email || !registered) {
+    alert("Name, email, and registration status are required");
+    return;
+  }
+
   // add data to modal
   const nameText = document.createElement("div");
   nameText.textContent = `Full Name: ${name}`;

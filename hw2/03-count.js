@@ -15,7 +15,7 @@ const count = function countMatchingWords(str) {
   if (str !== "") {
     words.forEach((word, index) => {
       if (word === str) {
-        words[index] = `<mark>${word}</mark>`;
+        words[index] = `<span style="background-color: yellow">${word}</span>`;
       }
     });
     paragraph.innerHTML = words.join("");

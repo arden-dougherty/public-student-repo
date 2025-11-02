@@ -46,7 +46,10 @@ const createCard = function createCardFromCharacter(obj, searchText) {
   let regex = new RegExp(searchText, "gi");
   const nameText = document.createTextNode(obj.name);
   name.append(nameText);
-  name.innerHTML = name.innerHTML.replace(regex, "<mark>$&</mark>");
+  name.innerHTML = name.innerHTML.replace(
+    regex,
+    '<span style="background-color: yellow">$&</span>'
+  );
   card.append(name);
   // add the character's birth year as card text
   const year = document.createElement("p");

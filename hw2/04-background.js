@@ -3,7 +3,7 @@ const btn = document.getElementById("btn");
 const userInput = document.getElementById("intervalInput");
 
 let on = true;
-let interval = 2;
+let interval = 3;
 let intervalID;
 
 const startColorChange = function startColorChangeOnWindowLoad() {
