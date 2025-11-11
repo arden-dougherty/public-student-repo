@@ -34,26 +34,31 @@ const Area = () => {
       });
   }, []);
 
+  const sorted = [...data].sort((a, b) => b.area - a.area);
+
+  const top5 = sorted.slice(0, 7);
+  const other = sorted.slice(7);
+
+  const labels = top5.map((country) => country.name.common);
+  const allData = top5.map((country) => country.area);
+
+  labels.push("Other");
+  allData.push(other.reduce((sum, country) => sum + country.area, 0));
+
   const areaData = {
-    labels: data.map((country) => country.name.common),
+    labels: labels,
     datasets: [
       {
         label: "Area",
-        data: data.map((country) => country.area),
+        data: allData,
         backgroundColor: [
-          "#E83131",
           "#EB9526",
-          "#FFBC5E",
           "#F7E045",
-          "#B1E060",
           "#6EE36B",
-          "#177327",
           "#60E0C1",
           "#60C6E0",
           "#6086E0",
           "#8460E0",
-          "#D560E0",
-          "#FFB3D8",
           "#E060AF",
         ],
         borderWidth: 2,
@@ -75,7 +80,7 @@ const Area = () => {
         },
       },
       legend: {
-        display: false,
+        display: true,
       },
       tooltip: {
         enabled: true,
@@ -87,10 +92,15 @@ const Area = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="d-flex flex-wrap justify-content-center">
+    <div className="d-flex flex-column align-items-center">
       <h1 className="m-5">Total Area of Countries in South America</h1>
       <br />
-      <Pie className="mb-5 ms-5 me-5" data={areaData} options={options} />
+      <div
+        className="chart-container d-flex justify-content-center align-items-center"
+        style={{ position: "relative", height: "70vh", width: "70vw" }}
+      >
+        <Pie className="mb-5 ms-5 me-5" data={areaData} options={options} />
+      </div>
     </div>
   );
 };

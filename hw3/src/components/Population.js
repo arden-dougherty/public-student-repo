@@ -33,12 +33,14 @@ const Population = () => {
       });
   }, []);
 
+  const sorted = [...data].sort((a, b) => b.population - a.population);
+
   const popData = {
-    labels: data.map((country) => country.name.common),
+    labels: sorted.map((country) => country.name.common),
     datasets: [
       {
         label: "Population",
-        data: data.map((country) => country.population),
+        data: sorted.map((country) => country.population),
         backgroundColor: "#42A5F5",
         borderColor: "#1E88E5",
         borderWidth: 1,
@@ -90,7 +92,12 @@ const Population = () => {
     <div className="d-flex flex-wrap justify-content-center">
       <h1 className="m-5">Population of Countries in South America</h1>
       <br />
-      <Bar className="mb-5 ms-5 me-5" data={popData} options={options} />
+      <div
+        className="chart-container d-flex justify-content-center align-items-center"
+        style={{ position: "relative", height: "70vh", width: "70vw" }}
+      >
+        <Bar className="mb-5 ms-5 me-5" data={popData} options={options} />
+      </div>
     </div>
   );
 };
